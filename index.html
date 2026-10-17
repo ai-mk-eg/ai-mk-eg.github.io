@@ -148,7 +148,7 @@ details.sample[open] summary::after{content:"−"}
 .form label,.form fieldset{display:grid;gap:6px;font-weight:700;font-size:.93rem}
 .form fieldset{border:0;padding:0;margin:0}
 .form legend{padding:0;margin-bottom:6px}
-.form input[type=text],.form input[type=tel]{font:inherit;font-weight:500;color:var(--text);background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;width:100%}
+.form input[type=text],.form input[type=tel],.form input[type=email]{font:inherit;font-weight:500;color:var(--text);background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;width:100%}
 .form input:focus{border-color:var(--line-hi)}
 .form input[aria-invalid="true"]{border-color:var(--err)}
 .err{color:var(--err);font-size:.82rem;font-weight:500;min-height:0}
@@ -217,7 +217,7 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <symbol id="i-upload" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></g></symbol>
 <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></g></symbol>
 </defs></svg>
-<div class="topbar"><span class="js-offer-on">عرض لمدة 24 ساعة: الموسوعة كاملة بـ <span class="js-price">150</span> جنيه بدل <span class="js-old-num">700</span><span class="tb-timer js-tb-timer"></span></span><span class="js-offer-off" hidden>الموسوعة كاملة بـ <span class="js-price">700</span> جنيه</span></div>
+<div class="topbar"><span class="js-offer-on">عرض خاص: الموسوعة كاملة بـ <span class="js-price">150</span> جنيه بدل <span class="js-old-num">700</span> · باقي <span class="tb-timer js-tb-timer"></span></span><span class="js-offer-off" hidden>الموسوعة كاملة بـ <span class="js-price">700</span> جنيه</span></div>
 <header>
 <div class="wrap nav">
 <a class="brand" href="#top"><span class="logo"><svg><use href="#i-brain"/></svg></span>موسوعة الذكاء الاصطناعي</a>
@@ -228,9 +228,9 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <section class="hero">
 <div class="wrap hero-grid">
 <div>
-<span class="pill"><span class="js-offer-on">عرض 24 ساعة بس · 767 درس بالعربي</span><span class="js-offer-off" hidden>767 درس بالعربي</span></span>
-<h1>اتعلم <span class="g">الذكاء الاصطناعي</span> من الصفر للاحتراف، في لينك واحد</h1>
-<p class="lead"><b>41 كورس</b> في <b>8 أقسام</b>: ChatGPT وClaude، المحتوى واليوتيوب، التسويق، البرمجة، التصميم، وتطبيقات لكل مهنة. ادفع من الموقع واستلم على <bdi>Google Drive</bdi>.</p>
+<span class="pill"><span class="js-offer-on">عرض لفترة محدودة · 767 درس بالعربي</span><span class="js-offer-off" hidden>767 درس بالعربي</span></span>
+<h1 id="headline">اتعلم <span class="g">الذكاء الاصطناعي</span> من الصفر للاحتراف، في لينك واحد</h1>
+<p class="lead" id="lead"><b>41 كورس</b> في <b>8 أقسام</b>: ChatGPT وClaude، المحتوى واليوتيوب، التسويق، البرمجة، التصميم، وتطبيقات لكل مهنة. ادفع من الموقع واستلم على <bdi>Google Drive</bdi>.</p>
 <div class="buy">
 <span class="price o"><span class="js-price">150</span> <small>جنيه</small></span>
 <span class="old js-offer-on">700 جنيه</span>
@@ -290,7 +290,7 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <div class="wrap">
 <div class="head">
 <h2>ادفع <span class="o">واستلم</span> في دقيقتين</h2>
-<p>حوّل المبلغ، اكتب بياناتك وارفع صورة التحويل. بنراجع التحويل ونبعتلك لينك الموسوعة على واتساب.</p>
+<p>حوّل المبلغ، اكتب بياناتك وارفع صورة التحويل. بنراجع التحويل ونشارك الموسوعة مع الجيميل بتاعك على Google Drive.</p>
 </div>
 <div class="checkout">
 <div class="box hi">
@@ -312,6 +312,10 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <label for="f-phone">رقم الواتساب (هنبعتلك عليه اللينك)
 <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="01xxxxxxxxx" dir="ltr" required>
 <span class="err" id="e-phone"></span>
+</label>
+<label for="f-email">الجيميل اللي هتستلم عليه الموسوعة على Google Drive
+<input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="example@gmail.com" dir="ltr" required>
+<span class="err" id="e-email"></span>
 </label>
 <fieldset>
 <legend>حوّلت بإيه؟</legend>
@@ -344,8 +348,8 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <section id="faq" style="padding-top:0">
 <div class="wrap">
 <div class="head"><h2>أسئلة <span class="g">مهمة</span></h2></div>
-<div class="faq">
-<details><summary>هستلم الموسوعة إمتى؟</summary><p>بعد ما نراجع التحويل بنبعتلك لينك فولدر Google Drive على رقم الواتساب اللي كتبته.</p></details>
+<div class="faq" id="faq-list">
+<details><summary>هستلم الموسوعة إمتى؟</summary><p>بعد ما نراجع التحويل بنشارك فولدر الموسوعة مع الجيميل اللي كتبته، وهيوصلك إشعار من Google Drive وتلاقيها في «مشترك معي».</p></details>
 <details><summary>محتاج أعرف حاجة قبل ما أبدأ؟</summary><p>لأ. الموسوعة فيها خريطة تعلم بتبدأ معاك من الأساسيات.</p></details>
 <details><summary>المحتوى بالعربي؟</summary><p>أغلب الكورسات بالعربي، وفيه كورسات قليلة بالإنجليزي زي كورس Claude.</p></details>
 <details><summary>هقدر أتفرج من الموبايل؟</summary><p>أيوه. Google Drive بيشتغل على الموبايل واللابتوب، وتقدر تنزل الدروس وتتفرج من غير نت.</p></details>
@@ -404,8 +408,10 @@ $("s-tabs").innerHTML=SAMPLES.map(s=>`<button class="s-tab" role="tab" type="but
 $("s-tabs").querySelectorAll(".s-tab").forEach((t,i)=>t.addEventListener("click",()=>showSample(i)));
 showSample(0);
 /* config values */
-const offerEnd=new Date(CONFIG.offerEnds);
-function offerActive(){ return CONFIG.regularPrice && !isNaN(offerEnd) && new Date()<offerEnd; }
+CONFIG.offerOn=true;
+function offerEndDate(){ return new Date(CONFIG.offerEnds); }
+function offerActive(){ if(!CONFIG.offerOn||!CONFIG.regularPrice) return false; const e=offerEndDate(); return isNaN(e)?true:new Date()<e; }
+CONFIG.basePrice=CONFIG.price;
 if(!offerActive()) CONFIG.price=CONFIG.regularPrice||CONFIG.price;
 function applyOffer(){
 const on=offerActive();
@@ -417,20 +423,36 @@ document.querySelectorAll(".js-save").forEach(e=>e.textContent="وفّر "+pct+"
 }
 applyOffer();
 function tick(){
-if(!offerActive()){ CONFIG.price=CONFIG.regularPrice; document.querySelectorAll(".js-price").forEach(e=>e.textContent=CONFIG.price); applyOffer(); return; }
-let t=Math.floor((offerEnd-new Date())/1000);
+clearTimeout(window.__tk);
+if(!offerActive()){ CONFIG.price=CONFIG.regularPrice; refreshPrices(); applyOffer(); return; }
+let t=Math.max(0,Math.floor((offerEndDate()-new Date())/1000));
 const H=Math.floor(t/3600),M=Math.floor(t%3600/60),S=t%60;
 document.querySelectorAll(".js-cd").forEach(e=>e.innerHTML=[[H,"ساعة"],[M,"دقيقة"],[S,"ثانية"]].map(x=>`<div><b>${pad(x[0])}</b><small>${x[1]}</small></div>`).join(""));
 document.querySelectorAll(".js-tb-timer").forEach(e=>e.textContent=`${pad(H)}:${pad(M)}:${pad(S)}`);
-setTimeout(tick,1000);
+window.__tk=setTimeout(tick,1000);
 }
 tick();
+function refreshPrices(){
 document.querySelectorAll(".js-price").forEach(e=>e.textContent=CONFIG.price);
 const per=Number(CONFIG.price)/TOTAL;
 document.querySelectorAll(".js-per").forEach(e=>e.textContent=per<1?Math.ceil(per*100)+" قرش":per.toFixed(1)+" جنيه");
 document.querySelectorAll(".js-paynum").forEach(e=>e.textContent=CONFIG.payNumber);
-const waBase="https://wa.me/"+CONFIG.whatsapp;
+waBase="https://wa.me/"+CONFIG.whatsapp;
 document.querySelectorAll(".js-wa").forEach(a=>{a.href=waBase;a.textContent="+"+CONFIG.whatsapp});
+document.querySelectorAll(".old.js-offer-on").forEach(e=>e.textContent=CONFIG.regularPrice+(e.closest(".buy")?" جنيه":""));
+}
+let waBase="";
+refreshPrices();
+/* live settings from the control panel */
+fetch(CONFIG.orderEndpoint+"?config=1").then(r=>r.json()).then(c=>{
+["price","regularPrice","offerEnds","payNumber","whatsapp"].forEach(k=>{ if(c[k]) CONFIG[k]=String(c[k]); });
+CONFIG.offerOn=c.offerOn!==false;
+if(!offerActive()) CONFIG.price=CONFIG.regularPrice;
+if(c.headline) $("headline").textContent=c.headline;
+if(c.lead) $("lead").textContent=c.lead;
+if(c.faq&&c.faq.length) $("faq-list").innerHTML=c.faq.map(f=>`<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
+refreshPrices(); applyOffer(); tick();
+}).catch(()=>{});
 document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>{
 const code=b.parentElement.querySelector("code");
 navigator.clipboard.writeText(CONFIG.payNumber).then(()=>{b.textContent="اتنسخ";setTimeout(()=>b.textContent="انسخ",1600)})
@@ -438,7 +460,7 @@ navigator.clipboard.writeText(CONFIG.payNumber).then(()=>{b.textContent="اتن�
 }));
 /* remember the buyer's name and phone on this device only */
 const KEY="ai-enc-buyer";
-try{const saved=JSON.parse(localStorage.getItem(KEY)||"{}"); if(saved.name)$("f-name").value=saved.name; if(saved.phone)$("f-phone").value=saved.phone}catch(e){}
+try{const saved=JSON.parse(localStorage.getItem(KEY)||"{}"); if(saved.name)$("f-name").value=saved.name; if(saved.phone)$("f-phone").value=saved.phone; if(saved.email)$("f-email").value=saved.email}catch(e){}
 /* screenshot: preview + shrink to a light JPEG before sending */
 let shot=null; // {b64, mime, name}
 const fShot=$("f-shot"), drop=$("drop");
@@ -478,6 +500,7 @@ let ok=true;
 const set=(id,msg)=>{$("e-"+id).textContent=msg; const inp=$("f-"+id); if(inp) inp.setAttribute("aria-invalid",msg?"true":"false"); if(msg) ok=false;};
 set("name", $("f-name").value.trim().length<3?"اكتب اسمك.":"");
 set("phone", /^01[0125]\d{8}$/.test(normPhone($("f-phone").value))?"":"اكتب رقم موبايل مصري صحيح، 11 رقم بيبدأ بـ 01.");
+set("email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("f-email").value.trim())?"":"اكتب الجيميل اللي هتستلم عليه الموسوعة، مثلًا name@gmail.com.");
 set("sender", $("f-sender").value.trim().length<3?"اكتب الرقم أو الحساب اللي حوّلت منه.":"");
 $("e-shot").textContent=shot?"":"ارفع صورة التحويل."; if(!shot) ok=false;
 return ok;
@@ -490,11 +513,12 @@ if(!check()){ (document.querySelector('[aria-invalid="true"]')||drop).scrollInto
 const data={
 name:$("f-name").value.trim(),
 phone:normPhone($("f-phone").value),
+email:$("f-email").value.trim().toLowerCase(),
 method:document.querySelector('input[name="method"]:checked').value,
 sender:$("f-sender").value.trim(),
 amount:CONFIG.price
 };
-try{localStorage.setItem(KEY,JSON.stringify({name:data.name,phone:data.phone}))}catch(err){}
+try{localStorage.setItem(KEY,JSON.stringify({name:data.name,phone:data.phone,email:data.email}))}catch(err){}
 const btn=$("submit"); btn.disabled=true; btn.textContent="بنبعت طلبك…";
 if(window.google && google.script && google.script.run){
 const payload={...data,image:shot.b64,mime:shot.mime};
@@ -523,13 +547,13 @@ $("fail").textContent="الطلب ماوصلش بسبب مشكلة في الات
 $("fail").hidden=false; btn.disabled=false; btn.textContent="تأكيد الدفع وإرسال الطلب";
 }
 function showDone(id,viaWa,d){
-const msg=["السلام عليكم، دفعت عرض موسوعة الذكاء الاصطناعي ✅", id?"رقم الطلب: "+id:"", "الاسم: "+d.name, "رقم الواتساب: "+d.phone, "التحويل: "+d.method+" من "+d.sender, "المبلغ: "+d.amount+" جنيه", viaWa?"(هبعت صورة التحويل هنا)":""].filter(Boolean).join("\n");
+const msg=["السلام عليكم، دفعت عرض موسوعة الذكاء الاصطناعي ✅", id?"رقم الطلب: "+id:"", "الاسم: "+d.name, "رقم الواتساب: "+d.phone, "جيميل الاستلام: "+d.email, "التحويل: "+d.method+" من "+d.sender, "المبلغ: "+d.amount+" جنيه", viaWa?"(هبعت صورة التحويل هنا)":""].filter(Boolean).join("\n");
 const wa=waBase+"?text="+encodeURIComponent(msg);
 $("order-box").innerHTML=`<div class="done">
 <span class="ok">${ico("i-check")}</span>
 <h3>${viaWa?"فاضل خطوة واحدة":"طلبك وصلنا"}</h3>
 ${id?`<p>رقم طلبك: <code>${esc(id)}</code></p>`:""}
-<p>${viaWa?"اضغط الزرار وابعت الرسالة، وارفق صورة التحويل في الشات. أول ما نراجع التحويل هنبعتلك لينك الموسوعة.":"بنراجع التحويل دلوقتي، وهنبعتلك لينك الموسوعة على واتساب "+esc(d.phone)+" أول ما يتأكد."}</p>
+<p>${viaWa?"اضغط الزرار وابعت الرسالة، وارفق صورة التحويل في الشات. أول ما نراجع التحويل هنبعتلك لينك الموسوعة.":"بنراجع التحويل دلوقتي، وأول ما يتأكد هنشارك الموسوعة مع "+esc(d.email)+" على Google Drive، وهتلاقيها في «مشترك معي»."}</p>
 <a class="btn ${viaWa?"btn-offer":"btn-ghost"}" href="${wa}" target="_blank" rel="noopener">${ico("i-wa")}${viaWa?"ابعت الطلب وصورة التحويل على واتساب":"عايز تكلمنا؟ واتساب"}</a>
 </div>`;
 $("order-box").scrollIntoView({behavior:"smooth",block:"center"});
