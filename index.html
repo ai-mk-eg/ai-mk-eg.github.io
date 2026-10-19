@@ -197,6 +197,23 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 .cd small{color:var(--muted);font-size:.7rem}
 .amount .old{font-size:1.1rem;margin-inline-start:auto;margin-inline-end:10px}
 .mbar .old{font-size:.85rem;margin-inline-start:6px}
+.bundle{display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:center;border:2px solid rgba(255,181,71,.6);border-radius:24px;padding:clamp(18px,3.5vw,30px);background:linear-gradient(135deg,rgba(255,181,71,.12),rgba(255,106,136,.08) 60%,transparent),var(--card)}
+.bundle > *{min-width:0}
+@media (max-width:760px){.bundle{grid-template-columns:1fr}}
+.bundle h2{font-size:clamp(1.4rem,3.6vw,2rem);margin:10px 0 8px}
+.bundle ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px;color:var(--muted)}
+.bundle li{display:flex;gap:8px;align-items:center}
+.bundle li svg{width:18px;height:18px;color:#FFB547}
+.b-price{display:grid;gap:8px;justify-items:center;text-align:center;padding:18px;border-radius:18px;background:rgba(0,0,0,.25)}
+.b-price b{font-family:var(--display);font-size:2.6rem;line-height:1}
+.b-price .btn{width:100%}
+.pick{display:grid;gap:8px}
+.pick label{display:flex!important;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);cursor:pointer;font-weight:700}
+.pick label > span:first-child{display:flex;align-items:center;gap:10px}
+.pick label:has(input:checked){border-color:#FFB547;background:rgba(255,181,71,.08)}
+.pick input{accent-color:#FFB547;width:18px;height:18px}
+.pick .pp{font-family:var(--display);color:#FFD08A;white-space:nowrap}
+.js-btop{text-decoration:underline;margin-inline-start:6px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -217,7 +234,7 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <symbol id="i-upload" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></g></symbol>
 <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></g></symbol>
 </defs></svg>
-<div class="topbar"><span class="js-offer-on">عرض خاص: الموسوعة كاملة بـ <span class="js-price">150</span> جنيه بدل <span class="js-old-num">700</span> · باقي <span class="tb-timer js-tb-timer"></span></span><span class="js-offer-off" hidden>الموسوعة كاملة بـ <span class="js-price">700</span> جنيه</span></div>
+<div class="topbar"><span class="js-offer-on">عرض خاص: الموسوعة كاملة بـ <span class="js-price">150</span> جنيه بدل <span class="js-old-num">700</span> · باقي <span class="tb-timer js-tb-timer"></span></span><a class="js-btop" href="#bundle" hidden>أو الموسوعتين بـ <span class="js-bprice"></span> جنيه</a><span class="js-offer-off" hidden>الموسوعة كاملة بـ <span class="js-price">700</span> جنيه</span></div>
 <header>
 <div class="wrap nav">
 <a class="brand" href="#top"><span class="logo"><svg><use href="#i-brain"/></svg></span>موسوعة الذكاء الاصطناعي</a>
@@ -263,6 +280,26 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <div class="stat"><b class="g">6</b><span>مسارات تعلم</span></div>
 </div>
 </div>
+<section id="bundle" hidden style="padding-block:28px 0">
+<div class="wrap"><div class="bundle">
+<div>
+<span class="pill">عرض الباقة · الموسوعتين مع بعض</span>
+<h2>خد <span class="o">الموسوعتين</span> بسعر واحد</h2>
+<p style="color:var(--muted)">موسوعة الذكاء الاصطناعي + موسوعة الجرافيك 2026 على Google Drive، اشتراك مدى الحياة.</p>
+<ul>
+<li><svg><use href="#i-check"/></svg>41 كورس ذكاء اصطناعي و767 درس</li>
+<li><svg><use href="#i-check"/></svg>+30 كورس تصميم ومونتاج و+23,000 قالب</li>
+<li><svg><use href="#i-check"/></svg>الاتنين بيوصلوا على نفس الجيميل</li>
+</ul>
+</div>
+<div class="b-price">
+<span class="old js-bold"></span>
+<b class="o"><span class="js-bprice"></span> <small style="font-size:1rem">جنيه</small></b>
+<span class="save js-bsave"></span>
+<a class="btn btn-offer" href="#checkout" id="b-cta">اطلب الباقة</a>
+</div>
+</div></div>
+</section>
 <section id="content">
 <div class="wrap">
 <div class="head">
@@ -295,7 +332,7 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <div class="checkout">
 <div class="box hi">
 <div class="step-t"><i>1</i>حوّل المبلغ</div>
-<div class="amount"><span>المبلغ المطلوب</span><span class="old js-offer-on">700</span><b class="o"><span class="js-price">150</span> جنيه</b></div>
+<div class="amount"><span>المبلغ المطلوب</span><span class="old" id="amt-old">700</span><b class="o"><span id="amt-price">150</span> جنيه</b></div>
 <div class="methods">
 <div class="method"><span class="mi v">كاش</span><div><small>فودافون كاش</small><code class="js-paynum"></code></div><button class="copy" type="button" data-copy="pay">انسخ</button></div>
 <div class="method"><span class="mi p">IPN</span><div><small>إنستاباي (على رقم الموبايل)</small><code class="js-paynum"></code></div><button class="copy" type="button" data-copy="pay">انسخ</button></div>
@@ -305,6 +342,11 @@ footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 <div class="box" id="order-box">
 <div class="step-t"><i>2</i>بياناتك وصورة التحويل</div>
 <form class="form" id="order" novalidate>
+<fieldset class="pick" id="pick" hidden>
+<legend>هتشتري إيه؟</legend>
+<label><span><input type="radio" name="product" value="ai" checked>موسوعة الذكاء الاصطناعي لوحدها</span><span class="pp"><span class="js-price"></span> جنيه</span></label>
+<label><span><input type="radio" name="product" value="bundle">باقة الموسوعتين</span><span class="pp"><span class="js-bprice"></span> جنيه</span></label>
+</fieldset>
 <label for="f-name">الاسم
 <input id="f-name" name="name" type="text" autocomplete="name" placeholder="اسمك بالكامل" required>
 <span class="err" id="e-name"></span>
@@ -371,9 +413,12 @@ regularPrice: "700",            // السعر العادي بعد ما العر�
 offerEnds: "2026-10-18T20:30:00+03:00", // نهاية العرض (24 ساعة)
 payNumber: "01030809995",       // رقم فودافون كاش وإنستاباي
 whatsapp: "201040747572",       // رقم واتساب الدعم بالكود الدولي
+product: "ai",
 orderEndpoint: "https://script.google.com/macros/s/AKfycbxd-wUymK7fsxcRfsAMxdFUnvyeucbv6tPwWteUUzPkMJhzoKIQ4PI8Vq9ItL3YNzXjAQ/exec"               // رابط Google Apps Script بعد ما تنشره (شوف ملف الإعداد). لو فاضي، الطلب بيتبعت على واتساب
 };
 /* ========================== */
+var BUNDLE={show:false};
+var waBase="https://wa.me/"+CONFIG.whatsapp;
 const TOTAL = 767;
 const CATS = [
 {name:"أساسيات الذكاء الاصطناعي", ic:"i-brain", c:"#22D3EE", n:9, l:138, d:"من الصفر، الأدوات، تلخيص الملفات"},
@@ -440,11 +485,11 @@ document.querySelectorAll(".js-paynum").forEach(e=>e.textContent=CONFIG.payNumbe
 waBase="https://wa.me/"+CONFIG.whatsapp;
 document.querySelectorAll(".js-wa").forEach(a=>{a.href=waBase;a.textContent="+"+CONFIG.whatsapp});
 document.querySelectorAll(".old.js-offer-on").forEach(e=>e.textContent=CONFIG.regularPrice+(e.closest(".buy")?" جنيه":""));
+updateAmount();
 }
-let waBase="";
 refreshPrices();
 /* live settings from the control panel */
-fetch(CONFIG.orderEndpoint+"?config=1").then(r=>r.json()).then(c=>{
+fetch(CONFIG.orderEndpoint+"?config=1&p="+CONFIG.product).then(r=>r.json()).then(c=>{
 ["price","regularPrice","offerEnds","payNumber","whatsapp"].forEach(k=>{ if(c[k]) CONFIG[k]=String(c[k]); });
 CONFIG.offerOn=c.offerOn!==false;
 if(!offerActive()) CONFIG.price=CONFIG.regularPrice;
@@ -453,6 +498,31 @@ if(c.lead) $("lead").textContent=c.lead;
 if(c.faq&&c.faq.length) $("faq-list").innerHTML=c.faq.map(f=>`<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
 refreshPrices(); applyOffer(); tick();
 }).catch(()=>{});
+/* bundle offer (controlled from the control panel) */
+function bActive(){ if(!BUNDLE.offerOn||!BUNDLE.regularPrice) return false; const e=new Date(BUNDLE.offerEnds); return isNaN(e)?true:new Date()<e; }
+function bPrice(){ return bActive()?BUNDLE.price:BUNDLE.regularPrice; }
+function selProduct(){ const r=document.querySelector('input[name="product"]:checked'); return (BUNDLE.show&&r)?r.value:CONFIG.product; }
+function updateAmount(){
+const isB=selProduct()==="bundle";
+const price=isB?bPrice():CONFIG.price, old=isB?BUNDLE.regularPrice:CONFIG.regularPrice, on=isB?bActive():offerActive();
+const a=document.getElementById("amt-price"), o=document.getElementById("amt-old");
+if(a) a.textContent=price; if(o){ o.textContent=old; o.hidden=!on; }
+}
+function renderBundle(){
+const show=!!BUNDLE.show && !!BUNDLE.price;
+$("bundle").hidden=!show; $("pick").hidden=!show;
+document.querySelectorAll(".js-btop").forEach(e=>e.hidden=!show);
+if(!show){ const r=document.querySelector('input[name="product"][value="'+CONFIG.product+'"]'); if(r) r.checked=true; updateAmount(); return; }
+const p=bPrice(), on=bActive();
+document.querySelectorAll(".js-bprice").forEach(e=>e.textContent=p);
+document.querySelectorAll(".js-bold").forEach(e=>{e.textContent=BUNDLE.regularPrice+" جنيه"; e.hidden=!on;});
+const pct=Math.round((1-Number(p)/Number(BUNDLE.regularPrice))*100);
+document.querySelectorAll(".js-bsave").forEach(e=>{e.textContent="وفّر "+pct+"%"; e.hidden=!on||!(pct>0);});
+updateAmount();
+}
+document.querySelectorAll('input[name="product"]').forEach(r=>r.addEventListener("change",updateAmount));
+$("b-cta").addEventListener("click",()=>{ const r=document.querySelector('input[name="product"][value="bundle"]'); if(r){ r.checked=true; updateAmount(); } });
+fetch(CONFIG.orderEndpoint+"?config=1&p=bundle").then(r=>r.json()).then(c=>{ Object.assign(BUNDLE,c); BUNDLE.show=c.show!==false; renderBundle(); }).catch(()=>{});
 document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>{
 const code=b.parentElement.querySelector("code");
 navigator.clipboard.writeText(CONFIG.payNumber).then(()=>{b.textContent="اتنسخ";setTimeout(()=>b.textContent="انسخ",1600)})
@@ -516,7 +586,8 @@ phone:normPhone($("f-phone").value),
 email:$("f-email").value.trim().toLowerCase(),
 method:document.querySelector('input[name="method"]:checked').value,
 sender:$("f-sender").value.trim(),
-amount:CONFIG.price
+amount:selProduct()==="bundle"?bPrice():CONFIG.price,
+product:selProduct()
 };
 try{localStorage.setItem(KEY,JSON.stringify({name:data.name,phone:data.phone,email:data.email}))}catch(err){}
 const btn=$("submit"); btn.disabled=true; btn.textContent="بنبعت طلبك…";
@@ -547,13 +618,13 @@ $("fail").textContent="الطلب ماوصلش بسبب مشكلة في الات
 $("fail").hidden=false; btn.disabled=false; btn.textContent="تأكيد الدفع وإرسال الطلب";
 }
 function showDone(id,viaWa,d){
-const msg=["السلام عليكم، دفعت عرض موسوعة الذكاء الاصطناعي ✅", id?"رقم الطلب: "+id:"", "الاسم: "+d.name, "رقم الواتساب: "+d.phone, "جيميل الاستلام: "+d.email, "التحويل: "+d.method+" من "+d.sender, "المبلغ: "+d.amount+" جنيه", viaWa?"(هبعت صورة التحويل هنا)":""].filter(Boolean).join("\n");
+const msg=["السلام عليكم، دفعت عرض "+(d.product==="bundle"?"باقة الموسوعتين":"موسوعة الذكاء الاصطناعي")+" ✅", id?"رقم الطلب: "+id:"", "الاسم: "+d.name, "رقم الواتساب: "+d.phone, "جيميل الاستلام: "+d.email, "التحويل: "+d.method+" من "+d.sender, "المبلغ: "+d.amount+" جنيه", viaWa?"(هبعت صورة التحويل هنا)":""].filter(Boolean).join("\n");
 const wa=waBase+"?text="+encodeURIComponent(msg);
 $("order-box").innerHTML=`<div class="done">
 <span class="ok">${ico("i-check")}</span>
 <h3>${viaWa?"فاضل خطوة واحدة":"طلبك وصلنا"}</h3>
 ${id?`<p>رقم طلبك: <code>${esc(id)}</code></p>`:""}
-<p>${viaWa?"اضغط الزرار وابعت الرسالة، وارفق صورة التحويل في الشات. أول ما نراجع التحويل هنبعتلك لينك الموسوعة.":"بنراجع التحويل دلوقتي، وأول ما يتأكد هنشارك الموسوعة مع "+esc(d.email)+" على Google Drive، وهتلاقيها في «مشترك معي»."}</p>
+<p>${viaWa?"اضغط الزرار وابعت الرسالة، وارفق صورة التحويل في الشات. أول ما نراجع التحويل هنبعتلك لينك الموسوعة.":"بنراجع التحويل دلوقتي، وأول ما يتأكد هنشارك "+(d.product==="bundle"?"الموسوعتين":"الموسوعة")+" مع "+esc(d.email)+" على Google Drive، وهتلاقيها في «مشترك معي»."}</p>
 <a class="btn ${viaWa?"btn-offer":"btn-ghost"}" href="${wa}" target="_blank" rel="noopener">${ico("i-wa")}${viaWa?"ابعت الطلب وصورة التحويل على واتساب":"عايز تكلمنا؟ واتساب"}</a>
 </div>`;
 $("order-box").scrollIntoView({behavior:"smooth",block:"center"});
