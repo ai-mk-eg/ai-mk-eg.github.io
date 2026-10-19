@@ -414,11 +414,19 @@ offerEnds: "2026-10-21T21:00:00+03:00", // نهاية العرض (24 ساعة)
 payNumber: "01030809995",       // رقم فودافون كاش وإنستاباي
 whatsapp: "201040747572",       // رقم واتساب الدعم بالكود الدولي
 product: "graphics",
+pixelId: "4609883025958267",
 orderEndpoint: "https://script.google.com/macros/s/AKfycbxd-wUymK7fsxcRfsAMxdFUnvyeucbv6tPwWteUUzPkMJhzoKIQ4PI8Vq9ItL3YNzXjAQ/exec"               // رابط Google Apps Script بعد ما تنشره (شوف ملف الإعداد). لو فاضي، الطلب بيتبعت على واتساب
 };
 /* ========================== */
 var BUNDLE={show:false};
 var waBase="https://wa.me/"+CONFIG.whatsapp;
+/* Meta Pixel (ID changeable from the control panel; empty = off) */
+var PIX=null;
+function pixInit(id){ if(!id||PIX===id) return; PIX=id;
+if(!window.fbq){ !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); }
+fbq('init',id); fbq('trackSingle',id,'PageView'); }
+function pix(ev,data){ try{ if(PIX&&window.fbq) fbq('trackSingle',PIX,ev,data||{}); }catch(e){} }
+pixInit(CONFIG.pixelId);
 const TOTAL = 10000;
 const CATS = [
 {name:"كورسات Adobe للتصميم", ic:"i-image", c:"#F472B6", m:"فوتوشوب · إليستريتور · إنديزاين", d:"من الأساسيات للاحتراف، مع الجديد في 2021 و2022"},
@@ -492,6 +500,7 @@ refreshPrices();
 fetch(CONFIG.orderEndpoint+"?config=1&p="+CONFIG.product).then(r=>r.json()).then(c=>{
 ["price","regularPrice","offerEnds","payNumber","whatsapp"].forEach(k=>{ if(c[k]) CONFIG[k]=String(c[k]); });
 CONFIG.offerOn=c.offerOn!==false;
+if(c.pixelId!==undefined){ if(c.pixelId) pixInit(String(c.pixelId)); else PIX=null; }
 if(!offerActive()) CONFIG.price=CONFIG.regularPrice;
 if(c.headline) $("headline").textContent=c.headline;
 if(c.lead) $("lead").textContent=c.lead;
@@ -522,6 +531,9 @@ updateAmount();
 }
 document.querySelectorAll('input[name="product"]').forEach(r=>r.addEventListener("change",updateAmount));
 $("b-cta").addEventListener("click",()=>{ const r=document.querySelector('input[name="product"][value="bundle"]'); if(r){ r.checked=true; updateAmount(); } });
+/* pixel: checkout reached */
+(function(){ var sent=false, el=document.getElementById("checkout"); if(!el||!("IntersectionObserver" in window)) return;
+new IntersectionObserver(function(es,o){ es.forEach(function(e){ if(e.isIntersecting&&!sent){ sent=true; o.disconnect(); var b=selProduct()==="bundle"; pix("InitiateCheckout",{value:Number(b?bPrice():CONFIG.price),currency:"EGP",content_ids:[selProduct()],content_type:"product"}); } }); },{threshold:.2}).observe(el); })();
 fetch(CONFIG.orderEndpoint+"?config=1&p=bundle").then(r=>r.json()).then(c=>{ Object.assign(BUNDLE,c); BUNDLE.show=c.show!==false; renderBundle(); }).catch(()=>{});
 document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>{
 const code=b.parentElement.querySelector("code");
@@ -618,6 +630,7 @@ $("fail").textContent="الطلب ماوصلش بسبب مشكلة في الات
 $("fail").hidden=false; btn.disabled=false; btn.textContent="تأكيد الدفع وإرسال الطلب";
 }
 function showDone(id,viaWa,d){
+pix("Purchase",{value:Number(d.amount)||0,currency:"EGP",content_ids:[d.product],content_name:d.product==="bundle"?"باقة الموسوعتين":document.title,content_type:"product"});
 const msg=["السلام عليكم، دفعت عرض "+(d.product==="bundle"?"باقة الموسوعتين":"موسوعة الجرافيك")+" ✅", id?"رقم الطلب: "+id:"", "الاسم: "+d.name, "رقم الواتساب: "+d.phone, "جيميل الاستلام: "+d.email, "التحويل: "+d.method+" من "+d.sender, "المبلغ: "+d.amount+" جنيه", viaWa?"(هبعت صورة التحويل هنا)":""].filter(Boolean).join("\n");
 const wa=waBase+"?text="+encodeURIComponent(msg);
 $("order-box").innerHTML=`<div class="done">
